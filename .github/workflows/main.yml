@@ -19,11 +19,11 @@ jobs:
           node-version: 18
 
       - name: Install backend dependencies (including dev)
-        working-directory: QA/QA/backend
+        working-directory: QA/backend
         run: npm install --include=dev
 
       - name: Install frontend dependencies
-        working-directory: QA/QA
+        working-directory: QA
         run: npm install
 
   test:
@@ -43,13 +43,11 @@ jobs:
           node-version: 18
 
       - name: Install backend dependencies (including dev)
-        working-directory: QA/QA/backend
+        working-directory: QA/backend
         run: npm install --include=dev
 
-      
-
       - name: Run Selenium tests
-        working-directory: QA/QA/backend
+        working-directory: QA/backend
         run: |
           npm install selenium-webdriver chromedriver
           npm run test:selenium || echo "Selenium tests skipped/failure"
@@ -62,11 +60,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run ESLint on frontend
-        working-directory: QA/QA
+        working-directory: QA
         run: npx eslint . || true
 
       - name: Run ESLint on backend
-        working-directory: QA/QA/backend
+        working-directory: QA/backend
         run: npx eslint . || true
 
   deploy:
